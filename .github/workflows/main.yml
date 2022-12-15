@@ -1,6 +1,8 @@
 name: Build pipeline
 on:
-  workflow_dispatch:
+  push:
+    tags:
+      - "v*.*.*"
 jobs:
   build_appimage:
     name: Build app image
@@ -12,5 +14,7 @@ jobs:
         run: docker build -t sonic-pi .
       - name: Extract AppImage
         run: (docker container create --name sonic-pi -t sonic-pi && docker container cp sonic-pi:/opt/Sonic_Pi-x86_64.AppImage .)
-
-      
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: Sonic_Pi-x86_64.AppImage
