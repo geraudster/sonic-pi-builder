@@ -5,7 +5,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y build-es
 RUN wget https://packages.erlang-solutions.com/erlang-solutions_2.0_all.deb && dpkg -i erlang-solutions_2.0_all.deb && apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y esl-erlang elixir
 
-RUN git clone --depth 1 https://github.com/sonic-pi-net/sonic-pi.git ~/Development/sonic-pi
+RUN git clone --branch v4.3.0 --depth 1 https://github.com/sonic-pi-net/sonic-pi.git ~/Development/sonic-pi
 
 WORKDIR /root/Development/sonic-pi/app
 SHELL ["/bin/bash", "-c"]
