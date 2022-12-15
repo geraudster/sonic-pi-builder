@@ -1,0 +1,16 @@
+name: Build pipeline
+on:
+  workflow_dispatch:
+jobs:
+  build_appimage:
+    name: Build app image
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Build
+        run: docker build -t sonic-pi .
+      - name: Extract AppImage
+        run: (docker container create --name sonic-pi -t sonic-pi && docker container cp sonic-pi:/opt/Sonic_Pi-x86_64.AppImage .)
+
+      
